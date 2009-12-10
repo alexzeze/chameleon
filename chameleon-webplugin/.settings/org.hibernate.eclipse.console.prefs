@@ -1,0 +1,4 @@
+#Mon Aug 17 13:50:55 EAT 2009
+default.configuration=jpa2
+eclipse.preferences.version=1
+hibernate3.enabled=true

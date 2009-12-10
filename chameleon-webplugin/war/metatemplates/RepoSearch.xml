@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="Repository Search">
+     <tabheader groups="" users="">
+	  <button name="" icon="" tooltip="" groups="" users="">
+	       <action></action>
+	       <dialog name="">
+		    <tab name="">
+			 <tabheader></tabheader>
+			 <column>
+			      <set name="">
+				   <control label="" type="" valuemask="" valuetype="" max="" min="" default="" tip="" selecttext="" daterange="" mandatory="" searchcombo="" gridheaders=""/>
+			      </set>
+			      <set name=""></set>
+			 </column>
+			 <column>
+			      <set nane=""></set>
+			 </column>
+		    </tab>
+		    <tab name=""></tab>
+	       </dialog>
+	  </button>
+     </tabheader>
+     <body>
+	  <bodyheader></bodyheader>
+	  <left></left>
+	  <center></center>
+	  <right></right>
+     </body>
+</module>

@@ -1,0 +1,89 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Explorerview Example</title>
+
+    <link rel="stylesheet" type="text/css" href="../../ext/resources/css/ext-all.css" />
+
+    <!-- GC -->
+ 	<!-- LIBS -->
+ 	<script type="text/javascript" src="../../ext/adapter/ext/ext-base.js"></script>
+ 	<!-- ENDLIBS -->
+
+    <script type="text/javascript" src="../../ext/ext-all-debug.js"></script>
+
+	<script type="text/javascript" src="Ext.ux.grid.ExplorerView.js"></script>
+	<script type="text/javascript" src="Ext.ux.grid.DragSelector.js"></script>
+    <script type="text/javascript" src="explorerview.js"></script>
+    <link rel="stylesheet" type="text/css" href="grid-examples.css" />
+
+    <!-- Common Styles for the examples -->
+    <link rel="stylesheet" type="text/css" href="../shared/examples.css" />
+
+    <style type="text/css">
+        body .x-panel {
+            margin-bottom:20px;
+        }
+        .icon-grid {
+            background-image:url(../shared/icons/fam/grid.png) !important;
+        }
+
+		/* I'm not happy to have to include this hack but since we're using floating elements */
+		/* this is needed, if anyone have a better solution, please keep me posted! */
+		.x-grid3-body:after { content: "."; display: block; height: 0; font-size: 0; clear: both; visibility: hidden; }
+		.x-grid3-body { display: inline-block; }
+		/* Hides from IE Mac \*/
+		* html .x-grid3-body { height: 1%; }
+		.x-grid3-body { display: block; }
+		/* End Hack */
+
+		.ux-explorerview-large-icon-row { width: 110px; height: 110px; float: left; margin: 5px 0 0 5px; border-top: 1px solid #EDEDED; }
+		.ux-explorerview-large-icon-row .x-grid3-row-table { width: 100%; }
+		.ux-explorerview-large-icon-row .x-grid3-row-table td { text-align: center; }
+		.ux-explorerview-large-icon-row .x-grid3-row-table td img {	margin: 10px 0; }
+
+		.ux-explorerview-detailed-icon-row { width: 200px; height: 50px; float: left; margin: 5px 0 0 5px; border-top: 1px solid #EDEDED; }
+		.ux-explorerview-detailed-icon-row .x-grid3-row-table { width: 100%; }
+		.ux-explorerview-detailed-icon-row .x-grid3-row-table td.ux-explorerview-icon { width: 45px; }
+		.ux-explorerview-detailed-icon-row .x-grid3-row-table td span { color: #aaaaaa; }
+	</style>
+</head>
+<body>
+<script type="text/javascript" src="../shared/examples.js"></script><!-- EXAMPLES -->
+<h1>ExplorerView Example</h1>
+
+<div style="width: 700px;">
+	<div style="width:250px; float: right;">
+		<div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>
+		<div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc">
+			<p>
+				<b>Send us a postcard!</b><br>
+				Send us a postcard with view over your town if you like this extension :)
+			</p>
+			<address>
+				Kaigan Media Technology<br>
+				Tre Liljor 6<br>
+				SE-113 44 Stockholm<br>
+				Sweden
+			</address>
+		</div></div></div>
+		<div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>
+	</div>
+
+	<p>Note that the js is not minified so it is readable. See <a href="explorerview.js">explorerview.js</a>.</p>
+
+	<p>
+		Also see:
+		<ul>
+			<li><a href="Ext.ux.grid.ExplorerView.js">Ext.ux.grid.ExplorerView.js</a></li>
+			<li><a href="Ext.ux.grid.DragSelector.js">Ext.ux.grid.DragSelector.js</a></li>
+		</ul>
+	</p>
+
+	<p>
+		<a href="explorerview.zip">Download package</a> and unzip into your examples directory.
+	</p><br><br>
+</div>
+
+</body>
+</html>

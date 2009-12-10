@@ -1,0 +1,164 @@
+archetype (adl_version=1.4)
+	openEHR-EHR-OBSERVATION.soap_clerking8.v8
+
+concept
+	[at0000]	-- The Clerical elements of Medical Clerking
+language
+	original_language = <[ISO_639-1::en]>
+description
+	original_author = <
+		["name"] = <"unknown">
+	>
+	details = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"for test purposes">
+			use = <"">
+			misuse = <"">
+		>
+	>
+	lifecycle_state = <"0">
+	other_contributors = <>
+	other_details = <
+		["references"] = <"">
+		["MD5-CAM-1.0.1"] = <"4D8388FBB453F87C522CE17483DE1B1C">
+	>
+
+definition
+	OBSERVATION[at0000] matches {	-- The Clerical elements of Medical Clerking
+		data matches {
+			HISTORY[at0001] matches {	-- Event Series
+				events cardinality matches {1..*; unordered} matches {
+					EVENT[at0002] occurrences matches {0..1} matches {	-- Any event
+						data matches {
+							ITEM_TREE[at0003] matches {	-- Tree
+								items cardinality matches {0..*; unordered} matches {
+									CLUSTER[at0007] occurrences matches {0..1} matches {	-- Clerical Detail
+										items cardinality matches {0..*; unordered} matches {
+											ELEMENT[at0004] occurrences matches {0..1} matches {	-- Responsible Consultant
+												value matches {
+													DV_TEXT matches {*}
+												}
+											}
+											ELEMENT[at0005] occurrences matches {0..1} matches {	-- Clerking Doctor
+												value matches {
+													DV_TEXT matches {*}
+												}
+											}
+											ELEMENT[at0042] occurrences matches {0..1} matches {	-- Source of Referral
+												value matches {
+													DV_TEXT matches {*}
+												}
+											}
+											ELEMENT[at0050] occurrences matches {0..1} matches {	-- Time and Date Patient Seen
+												value matches {
+													DV_TEXT matches {*}
+												}
+											}
+											ELEMENT[at0051] occurrences matches {0..1} matches {	-- Time and Date of Clerking
+												value matches {
+													DV_TEXT matches {*}
+												}
+											}
+											ELEMENT[at0045] occurrences matches {0..1} matches {	-- Patients Location
+												value matches {
+													DV_TEXT matches {*}
+												}
+											}
+											CLUSTER[at0047] occurrences matches {0..1} matches {	-- Person completing Clerking
+												items cardinality matches {0..*; unordered} matches {
+													ELEMENT[at0046] occurrences matches {0..1} matches {	-- Doctors name
+														value matches {
+															DV_TEXT matches {*}
+														}
+													}
+													ELEMENT[at0048] occurrences matches {0..1} matches {	-- Grade
+														value matches {
+															DV_TEXT matches {*}
+														}
+													}
+													ELEMENT[at0049] occurrences matches {0..1} matches {	-- Doctors signature
+														value matches {
+															DV_TEXT matches {*}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"The Clerical elements of Medical Clerking">
+					description = <"SOAP- start with Subjective (history)">
+				>
+				["at0001"] = <
+					text = <"Event Series">
+					description = <"@ internal @">
+				>
+				["at0002"] = <
+					text = <"Any event">
+					description = <"*">
+				>
+				["at0003"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0004"] = <
+					text = <"Responsible Consultant">
+					description = <"*">
+				>
+				["at0005"] = <
+					text = <"Clerking Doctor">
+					description = <"*">
+				>
+				["at0007"] = <
+					text = <"Clerical Detail">
+					description = <"*">
+				>
+				["at0042"] = <
+					text = <"Source of Referral">
+					description = <"*">
+				>
+				["at0045"] = <
+					text = <"Patients Location">
+					description = <"*">
+				>
+				["at0046"] = <
+					text = <"Doctors name">
+					description = <"*">
+				>
+				["at0047"] = <
+					text = <"Person completing Clerking">
+					description = <"*">
+				>
+				["at0048"] = <
+					text = <"Grade">
+					description = <"*">
+				>
+				["at0049"] = <
+					text = <"Doctors signature">
+					description = <"*">
+				>
+				["at0050"] = <
+					text = <"Time and Date Patient Seen">
+					description = <"*">
+				>
+				["at0051"] = <
+					text = <"Time and Date of Clerking">
+					description = <"*">
+				>
+			>
+		>
+	>

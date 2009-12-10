@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.mbuni.org/schemas/mbuni" elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:mb="http://www.mbuni.org/schemas/mbuni">
+
+    <element name="property">
+    	<simpleType>
+    		<restriction base="string"></restriction>
+    	</simpleType>
+    </element>
+
+    <attribute name="name" type="string"></attribute>
+
+    <attribute name="value" type="string"></attribute>
+
+    <attribute name="type">
+    	<simpleType>
+    		<restriction base="string">
+    			<enumeration value="date"></enumeration>
+    			<enumeration value="string"></enumeration>
+    			<enumeration value="integer"></enumeration>
+    			<enumeration value="boolean"></enumeration>
+    			<enumeration value="float"></enumeration>
+    			<enumeration value="binary"></enumeration>
+    			<enumeration value="interval"></enumeration>
+    		</restriction>
+    	</simpleType>
+    </attribute>
+
+
+</schema>

@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<node name="Observations">
+<node name="Examinations">
+<node name="History">
+<leaf name="Blood Pressure"/>
+<leaf name="Blood Sugar Level"/>
+<leaf name="Weight"/>
+<leaf />
+</node>
+</node>
+</node>
