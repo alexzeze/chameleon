@@ -1,0 +1,266 @@
+archetype (adl_version=1.4)
+	openEHR-EHR-INSTRUCTION.soap_plan_aspect.v5
+
+concept
+	[at0000]	-- SOAP_Plan aspect
+language
+	original_language = <[ISO_639-1::en]>
+description
+	original_author = <
+		["name"] = <"unknown">
+	>
+	details = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"For testing purposes">
+			use = <"">
+			misuse = <"">
+		>
+	>
+	lifecycle_state = <"0">
+	other_contributors = <>
+	other_details = <
+		["references"] = <"">
+		["MD5-CAM-1.0.1"] = <"C730CA831D71B28E89B26A54B1E27BB7">
+	>
+
+definition
+	INSTRUCTION[at0000] matches {	-- SOAP_Plan aspect
+		activities cardinality matches {0..*; unordered} matches {
+			ACTIVITY[at0001] occurrences matches {0..1} matches {	-- new activity
+				description matches {
+					ITEM_TREE[at0002] matches {	-- Tree
+						items cardinality matches {0..*; unordered} matches {
+							CLUSTER[at0025] occurrences matches {0..1} matches {	-- Initial Investigations
+								items cardinality matches {0..*; unordered} matches {
+									ELEMENT[at0026] occurrences matches {0..1} matches {	-- FBC order
+										value matches {
+											DV_BOOLEAN matches {
+												value matches {True, False}
+											}
+										}
+									}
+									ELEMENT[at0027] occurrences matches {0..1} matches {	-- U&E order
+										value matches {
+											DV_BOOLEAN matches {
+												value matches {True, False}
+											}
+										}
+									}
+									ELEMENT[at0028] occurrences matches {0..1} matches {	-- ECG order
+										value matches {
+											DV_BOOLEAN matches {
+												value matches {True, False}
+											}
+										}
+									}
+									ELEMENT[at0029] occurrences matches {0..1} matches {	-- other order
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+								}
+							}
+							CLUSTER[at0015] occurrences matches {0..1} matches {	-- Initial Treatment
+								items cardinality matches {0..*; unordered} matches {
+									ELEMENT[at0003] occurrences matches {0..1} matches {	-- ABC
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0031] occurrences matches {0..1} matches {	-- Oxygen (L/minute)
+										value matches {
+											C_DV_QUANTITY <
+												property = <[openehr::126]>
+												list = <
+													["1"] = <
+														units = <"l/min">
+													>
+												>
+											>
+										}
+									}
+									ELEMENT[at0005] occurrences matches {0..1} matches {	-- IV Access
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0008] occurrences matches {0..1} matches {	-- IV Fluid
+										value matches {
+											DV_TEXT matches {
+												value matches {"IV Saline 1litre stat", "IV Saline 1litre over 2 hours", "IV Saline 1litre over 4 hours", "IV Saline 1 litre over 8hours"}
+											}
+										}
+									}
+									ELEMENT[at0009] occurrences matches {0..1} matches {	-- IV Medication
+										value matches {
+											DV_TEXT matches {
+												value matches {"IV Morphine 5-10mg titrated to effect", "IV Cefuroxime 2g stat", "IV Cyclizine 50mg stat"}
+											}
+										}
+									}
+									ELEMENT[at0012] occurrences matches {0..1} matches {	-- Cardiac Monitoring
+										value matches {
+											DV_BOOLEAN matches {
+												value matches {True, False}
+											}
+										}
+									}
+									ELEMENT[at0010] occurrences matches {0..1} matches {	-- Po Medication
+										value matches {
+											DV_TEXT matches {
+												value matches {"Po Paracetamol 1g stat", "Po Ibuprofen 600mg stat", "Po Codeine 30 stat"}
+											}
+										}
+									}
+								}
+							}
+							ELEMENT[at0018] occurrences matches {0..1} matches {	-- Initial Procedures
+								value matches {
+									DV_TEXT matches {*}
+								}
+							}
+							CLUSTER[at0019] occurrences matches {0..1} matches {	-- Management Plan
+								items cardinality matches {0..*; unordered} matches {
+									ELEMENT[at0020] occurrences matches {0..1} matches {	-- Next steps
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0021] occurrences matches {0..1} matches {	-- Special Monitoring required
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0022] occurrences matches {0..1} matches {	-- Resuscitation status
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0023] occurrences matches {0..1} matches {	-- Information given to patient +/or authorised representative
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+								}
+							}
+							ELEMENT[at0014] occurrences matches {0..1} matches {	-- Discharge Planning
+								value matches {
+									DV_TEXT matches {*}
+								}
+							}
+							ELEMENT[at0011] occurrences matches {0..1} matches {	-- Referal
+								value matches {
+									DV_TEXT matches {*}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"SOAP_Plan aspect">
+					description = <"Plan. the P in the SOAP">
+				>
+				["at0001"] = <
+					text = <"new activity">
+					description = <"*">
+				>
+				["at0002"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0003"] = <
+					text = <"ABC">
+					description = <"*">
+				>
+				["at0005"] = <
+					text = <"IV Access">
+					description = <"*">
+				>
+				["at0008"] = <
+					text = <"IV Fluid">
+					description = <"*">
+				>
+				["at0009"] = <
+					text = <"IV Medication">
+					description = <"*">
+				>
+				["at0010"] = <
+					text = <"Po Medication">
+					description = <"*">
+				>
+				["at0011"] = <
+					text = <"Referal">
+					description = <"*">
+				>
+				["at0012"] = <
+					text = <"Cardiac Monitoring">
+					description = <"*">
+				>
+				["at0014"] = <
+					text = <"Discharge Planning">
+					description = <"*">
+				>
+				["at0015"] = <
+					text = <"Initial Treatment">
+					description = <"*">
+				>
+				["at0018"] = <
+					text = <"Initial Procedures">
+					description = <"*">
+				>
+				["at0019"] = <
+					text = <"Management Plan">
+					description = <"*">
+				>
+				["at0020"] = <
+					text = <"Next steps">
+					description = <"*">
+				>
+				["at0021"] = <
+					text = <"Special Monitoring required">
+					description = <"*">
+				>
+				["at0022"] = <
+					text = <"Resuscitation status">
+					description = <"*">
+				>
+				["at0023"] = <
+					text = <"Information given to patient +/or authorised representative">
+					description = <"*">
+				>
+				["at0025"] = <
+					text = <"Initial Investigations">
+					description = <"*">
+				>
+				["at0026"] = <
+					text = <"FBC order">
+					description = <"*">
+				>
+				["at0027"] = <
+					text = <"U&E order">
+					description = <"*">
+				>
+				["at0028"] = <
+					text = <"ECG order">
+					description = <"*">
+				>
+				["at0029"] = <
+					text = <"other order">
+					description = <"*">
+				>
+				["at0031"] = <
+					text = <"Oxygen (L/minute)">
+					description = <"*">
+				>
+			>
+		>
+	>

@@ -1,0 +1,8 @@
+<!-- Tomcat context descriptor used for specifying a custom ClassLoader -->
+<Context path="/mbuni" docBase="mbuni" debug="4" reloadable="true"><!--  reloadable="false" -->
+	<!-- please note that useSystemClassLoaderAsParent is available since Tomcat 5.5.20 / remove if previous versions are being used -->
+	 <!--  
+	<Loader loaderClass="org.springframework.instrument.classloading.tomcat.TomcatInstrumentableClassLoader" useSystemClassLoaderAsParent="false"/>
+	-->
+	<Resource factory="org.apache.commons.dbcp.BasicDataSourceFactory" driverClassName="org.postgresql.Driver" url="jdbc:postgresql://localhost:5432/mbuni" username="mbuni" password="mbuni" auth="Container" name="jdbc/example" maxActive="50" maxIdle="10" maxWait="1000" removeAbandoned="true" removeAbandonedTimeout="60" logAbandoned="true" type="javax.sql.DataSource" />
+</Context>

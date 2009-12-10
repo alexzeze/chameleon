@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Application context definition for PetClinic on Hibernate.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+		
+	
+	<!-- ========================= RESOURCE DEFINITIONS ========================= -->
+
+	<!--
+		Activates a load-time weaver for the context. Any bean within the context that
+		implements LoadTimeWeaverAware (such as LocalContainerEntityManagerFactoryBean)
+		will receive a reference to the autodetected load-time weaver.
+	-->
+	<!-- <context:load-time-weaver/> -->
+	
+	<!-- Configurer that replaces ${...} placeholders with values from a properties file -->
+	<!-- (in this case, JDBC-related settings for the dataSource definition below) -->
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+	
+	<context:component-scan base-package="org.mbuni.service.database.dao"/>
+	<context:component-scan base-package="org.mbuni.db.manager"/>
+	<context:component-scan base-package="org.mbuni.service.controller"/>
+	<context:component-scan base-package="org.mbuni.service.web"/>
+	<context:component-scan base-package="org.mbuni.service.atom"/>
+	
+	
+	<!-- DriverManagerDataSource is a local DataSource that works in any environment. -->
+	<!-- Note that DriverManagerDataSource does not pool connections and is therefore not intended for production. -->
+	<!-- See applicationContext-jdbc.xml for an example of using Commons DBCP BasicDataSource as an alternative. -->
+	<!-- See the Image Database sample application for an example of using C3P0 ComboPooledDataSource as alternative. -->
+	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+			p:driverClassName="${jdbc.driverClassName}" p:url="${jdbc.url}" p:username="${jdbc.username}"
+			p:password="${jdbc.password}"/> -->
+			
+	<jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/example"/>
+	
+	<!-- JPA EntityManagerFactory -->
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+			p:persistenceXmlLocation="classpath*:persistence.xml" p:dataSource-ref="dataSource" p:persistenceUnitName="mbuni2">
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
+					p:database="${jpa.database}" p:showSql="${jpa.showSql}"/>
+			
+		</property>
+	</bean>
+	<!-- <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor">
+	<property name="persistenceUnits">
+	<map>
+	<entry key="mbuni2" value="java:comp/env/jdbc/example" />
+	</map>
+	</property>
+	</bean> -->
+	
+	
+	<!-- <tx:jta-transaction-manager /> -->
+	<tx:annotation-driven />
+
+	<!-- Transaction manager for a single JPA EntityManagerFactory (alternative to JTA) -->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+			p:entityManagerFactory-ref="entityManagerFactory"/>
+
+
+	<!-- ========================= BUSINESS OBJECT DEFINITIONS ========================= -->
+
+	<!--
+		Activates various annotations to be detected in bean classes: Spring's
+		@Required and @Autowired, as well as JSR 250's @PostConstruct,
+		@PreDestroy and @Resource (if available) and JPA's @PersistenceContext
+		and @PersistenceUnit (if available).
+	-->
+	<context:annotation-config/>
+
+	<!--
+		Instruct Spring to perform declarative transaction management
+		automatically on annotated classes.
+	-->
+	<!-- <tx:annotation-driven/> --><!--  mode="aspectj" -->
+	
+	<!--
+		Post-processor to perform exception translation on @Repository classes (from native
+		exceptions such as JPA PersistenceExceptions to Spring's DataAccessException hierarchy).
+	-->
+	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+	
+	
+	<!-- COMPASS START -->
+    <bean id="compass" class="org.compass.spring.LocalCompassBean">
+    	<!-- <property name="resourceLocations">
+            <list>
+                <value>classpath:org/mbuni/service/database/dao/Language.class</value>
+            </list>
+        </property> -->
+        <property name="classMappings">
+            <list>
+                <value>org.mbuni.service.database.dao.Language</value>
+            </list>
+        </property>
+        <property name="compassSettings">
+            <props>
+                <prop key="compass.engine.connection">/home/alex/compass/indexes</prop>
+                <!-- <prop key="compass.transaction.factory">org.compass.spring.transaction.SpringSyncTransactionFactory</prop> -->
+            </props>
+        </property>
+        <property name="transactionManager">
+            <ref local="transactionManager" />
+        </property>
+        <!-- <property name="compassConfiguration" ref="annotationConfiguration" /> -->
+    </bean>
+    <bean id="jpaGpsDevice" class="org.compass.gps.device.jpa.JpaGpsDevice">
+      <property name="name"><value>jpaDevice</value></property>
+      <property name="entityManagerFactory"><ref local="entityManagerFactory" /></property>
+
+      <property name="fetchCount"><value>1000</value></property>
+      <property name="entityManagerWrapper"><ref local="entityManagerWrapper" /></property>
+      <property name="injectEntityLifecycleListener"><value>true</value></property>
+      <property name="mirrorDataChanges"><value>true</value></property>
+      <property name="lifecycleInjector"><ref local="lifecycleInjector" /></property>
+
+      <property name="nativeExtractor"><bean class="org.compass.gps.device.jpa.extractor.SpringNativeJpaExtractor" /></property><!-- org.compass.spring.device.hibernate.SpringNativeHibernateExtractor -->
+    </bean>
+    <bean id="lifecycleInjector" class="org.compass.gps.device.jpa.lifecycle.HibernateJpaEntityLifecycleInjector"></bean>
+    <bean id="entityManagerWrapper" class="org.compass.gps.device.jpa.ResourceLocalEntityManagerWrapper"></bean><!-- org.compass.gps.device.jpa.ResourceLocalEntityManagerWrapper -->
+
+	 <bean id="compassGps" class="org.compass.gps.impl.SingleCompassGps" init-method="start" destroy-method="stop">
+	   <property name="compass"><ref bean="compass" /></property>
+	   <property name="gpsDevices">
+	     <list>
+             <ref bean="jpaGpsDevice" />
+             <!-- <bean class="org.compass.gps.device.AbstractMirrorGpsDeviceWrapper">
+				 <property name="gpsDevice" ref="jpaGpsDevice" />
+			 </bean> -->
+	     </list>
+	   </property>
+	 </bean>
+
+
+	 <!-- COMPASS END -->
+	
+
+</beans>
